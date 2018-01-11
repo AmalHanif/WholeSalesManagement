@@ -1,0 +1,109 @@
+
+<h1>Name {{name}}</h1>
+  <p>Email: {{email}}</p>
+  <!-- <p>Card: {{card.cardNum}}, CVC: {{card.cardCVC}}, Expire Date: {{card.cardExpDate}}</p> -->
+  <button (click)="toggleHobbies()">{{showHobbies ? "Hide Hobbies" : "Show Hobbies"}}</button>
+  <div *ngIf ="showHobbies" >
+    <h3>Hobbies:</h3>
+    <ul>
+      <li *ngFor= "let hobby of hobbies; let i=index" >
+          {{hobby}} <button (click)="deleteHobby(i)" >X</button>
+      </li>
+    </ul>
+    <form (submit)= "addHobby(hobby.value)">
+    <label>Add hobby</label><br/>
+    <input type="text" #hobby/><br/>
+    </form>
+  </div>
+  <hr/>
+  <!-------------------------------->
+
+
+
+      <h3>TodoList:</h3>
+    <ul>
+      <li *ngFor= "let task of tasks;" >
+          {{task}}
+      </li>
+    </ul>
+    <form (submit)= "addTask(Newtask.value)">
+      <label>Add task</label><br/>
+      <input type="text" #Newtask/><br/>
+    </form>
+
+    <hr/>
+      <h3>Get Data  From db:</h3>
+      <div *ngFor= "let data of datadb">
+        <h3>{{data.name}}</h3>
+        <p>{{data.email}}</p>
+        <p>{{data.area}}</p>
+        <p>{{data.cus_id}}</p>
+
+
+      </div>
+      <form class="well" (submit)="addData($event)"   >
+        <div class="form-group">
+          <label> Name:</label><br/>
+          <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name..."><br/>
+          <label> Email:</label><br/>
+          <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email..."><br/>
+          <label> Area:</label><br/>
+          <input type="text" [(ngModel)]="area" name="area" class="form-control" placeholder="Add area..."><br/>
+
+
+            <span class="payment-message">{{message}}</span>
+
+             <div class="form-row">
+               <label>
+                 <span>Card Number</span>
+                 <input [(ngModel)]="cardNumber" name="card-number" type="text" size="20" data-stripe="number">
+               </label>
+             </div>
+             <div class="form-row">
+               <label>
+                 <span>Expiration (MM/YY)</span>
+                 <input [(ngModel)]="expiryMonth" name="expiry-month" type="text" size="2" data-stripe="exp_month">
+               </label>
+               <span> / </span>
+               <input [(ngModel)]="expiryYear" name="expiry-year" type="text" size="2" data-stripe="exp_year">
+             </div>
+
+             <div class="form-row">
+               <label>
+                 <span>CVC</span>
+                 <input [(ngModel)]="cvc" name="cvc" type="text" size="4" data-stripe="cvc">
+               </label>
+             </div>
+
+            <button (click)="addData($event)"> submit</button>
+              </div>
+      </form>
+    <hr/>
+
+  <label> Todo:</label><br/>
+    {{todo}}<br/>
+  <input type="text" name="todo" [(ngModel)]="todo" /><br/>
+  <hr/>
+  <h3>Edit User</h3>
+  <form>
+    <label> Name:</label><br/>
+    <input type="text" name="name" [(ngModel)]="name" /><br/>
+    <label> Email:</label><br/>
+    <input type="text" name="email" [(ngModel)]="email" /><br/>
+    <label> Card Number:</label><br/>
+    <input type="number" name="cardNum" [(ngModel)]="cardNum" /><br/>
+    <label> Card CVC:</label><br/>
+    <input type="number" name="cardCVC" [(ngModel)]="cardCVC" /><br/>
+    <label> Card Expire Date:</label><br/>
+    <input type="text" name="cardExpDate" [(ngModel)]="cardExpDate" /><br/>
+  </form>
+  <hr/>
+    <h3>Get Data  From db:</h3>
+    <div *ngFor= "let data of datadb">
+      <h3>{{data.name}}</h3>
+      <p>{{data.email}}</p>
+    </div>
+    <form (submit)= "addData(data.name.value)">
+      <label>Name</label><br/>
+      <input type="text" #data.name/><br/>
+    </form>

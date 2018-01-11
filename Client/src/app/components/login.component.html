@@ -1,0 +1,14 @@
+<h1>Login/SignUp</h1>
+<form class="well" (submit)="addData($event)"   >
+  <div class="form-group">
+    <label> Name:</label><br/>
+    <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name..."><br/>
+    <label> Email:</label><br/>
+    <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email..."><br/>
+    <label> Password:</label><br/>
+    <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Add password..."><br/>
+
+    <button (click)="addData($event)">SignUp</button>
+        </div>
+</form>
+<hr/>
