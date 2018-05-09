@@ -1,14 +1,39 @@
-<h1>Login/SignUp</h1>
-<form class="well" (submit)="addData($event)"   >
-  <div class="form-group">
-    <label> Name:</label><br/>
-    <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name..."><br/>
-    <label> Email:</label><br/>
-    <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email..."><br/>
-    <label> Password:</label><br/>
-    <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Add password..."><br/>
+<!--Grid column-->
+<div class="row justify-content-center align-self-center">
+  <div class="col-lg-4 col-md-12" >
+    <!--Card-->
+    <div class="card card-cascade narrower">
+      <!--Card image-->
+      <div class="view gradient-card-header peach-gradient text-center">
+        <h2 class="h2-responsive">Login</h2>
+      </div>
+      <!--/Card image-->
 
-    <button (click)="addData($event)">SignUp</button>
-        </div>
-</form>
-<hr/>
+      <!--Card content-->
+      <div class="card-body text-center">
+        <form class="well" (submit)="userData($event)"  method="post" id="login-form"  >
+          <div class="form-group">
+            <div class="md-form d-flex">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input mdbInputDirective type="email" [(ngModel)]="email" data-error="wrong email" data-success="right email" class="form-control" id="form9" name="email">
+                <label for="form9">Type your e-mail</label>
+            </div>
+            <div class="md-form d-flex">
+                <i class="fa fa-lock prefix grey-text"></i>
+                <input mdbInputDirective type="password" [(ngModel)]="password" data-error="wrong password" data-success="right password" class="form-control" id="form10" name="password">
+                <label for="form10">Type your password</label>
+            </div>
+            <div class="text-center">
+                <input type="submit" routerLink="/home" (click)="userData($event)" class="btn btn-deep-orange waves-light" mdbWavesEffect value="Login">
+            </div>
+            <p>Have an Account?<span routerLink="/signup">Sign Up</span></p>
+              
+          </div>
+        </form> 
+      </div>
+      <!--/.Card content-->
+    </div>
+    <!--/.Card-->
+  </div>
+</div>
+<!--Grid column-->

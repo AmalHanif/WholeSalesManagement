@@ -1,0 +1,56 @@
+<div class="container">
+    <h1>Supplier Data</h1>
+    <table class="ui table table-striped">
+        <thead class="mdb-color darken-3">
+            <tr class="text-white">
+                <th *ngFor="let title of tableHeaders">{{title}}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td *ngFor="let tdata of tabledata">
+                    <span >{{tdata}}</span>      
+                    <div *ngIf ="showEditRow">
+                        <input type="text"  [(ngModel)]="newdata" name="tdata"  /><br/>
+                    </div>
+                        
+                    
+                        <!-- <div class="ui input" *ngIf="!(supplierService.isEditing.indexOf(row) == -1) && supplierService.checkTypeOf(cell.content) !== 'boolean'">
+                            <input type="text" [(ngModel)]="cell.content" [name]="cell.content">
+                        </div>
+                        <div *ngIf="!(supplierService.isEditing.indexOf(row) == -1) && supplierService.checkTypeOf(cell.content) === 'boolean'" class="field checkboxContainer">
+                            <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="public" [(ngModel)]="cell.content" name="active">
+                                    <label>{{cell.content ? 'Cash' : 'Credit'}}</label>
+                            </div>
+                        </div> -->
+                </td>
+                <td>
+                    <button (click)="toggleRow()">{{showEditRow ? Save : Edit}}
+                    <i id="Edit" class="fa fa-pencil-square-o"></i>
+                    </button>
+                        <button (click)="supplierService.saveRow(row)">
+                    <i id="Save"class="fa fa-check"></i>
+                    </button>
+                        <button  (click)="supplierService.deleteRow(row)">
+                    <i class="fa fa-times"></i>
+                    </button>
+                        <button  (click)="supplierService.cancelEdition(row)">
+                    <i class="fa fa-times"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th *ngFor="let title of supplierService.tableHeadersObjects"></th>
+                <th>
+                    <button (click)="supplierService.addRow()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>    

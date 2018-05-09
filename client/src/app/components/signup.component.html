@@ -1,0 +1,44 @@
+<!--Grid column-->
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-12" >
+    <!--Card-->
+    <div class="card card-cascade narrower">
+      <!--Card image-->
+      <div class="view gradient-card-header peach-gradient text-center">
+        <h2 class="h2-responsive">Sign In</h2>
+      </div>
+      <!--/Card image-->
+
+      <!--Card content-->
+      <div class="card-body text-center">
+        <form class="well" (submit)="userData($event)"  method="post" id="login-form"  >
+          <div class="form-group">
+            <div class="md-form d-flex">
+                <i class="fa fa-user prefix grey-text"></i>
+                <input mdbInputDirective type="name" [(ngModel)]="name" class="form-control" id="nameewew" name="name">
+                <label for="form9">Type your name</label>
+            </div>
+            <div class="md-form d-flex">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input mdbInputDirective type="email" [(ngModel)]="email" data-error="wrong email" data-success="right email" class="form-control" id="email" name="email">
+                <label for="form9">Type your e-mail</label>
+            </div>
+            <div class="md-form d-flex">
+                <i class="fa fa-lock prefix grey-text"></i>
+                <input mdbInputDirective type="password" [(ngModel)]="password" data-error="wrong password" data-success="right password" class="form-control" id="password" name="password">
+                <label for="form10">Type your password</label>
+            </div>
+            <div class="text-center">
+                <input type="submit" routerLink="/home" (click)="userData($event)" class="btn btn-default waves-light" mdbWavesEffect value="SignUp">
+            </div>
+              <p >Have an Account?<span routerLink="/login">Login</span></p>
+          </div>
+        </form> 
+      </div>
+      <!--/.Card content-->
+    </div>
+    <!--/.Card-->
+  </div>
+</div>
+<!--Grid column-->
+

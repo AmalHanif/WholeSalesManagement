@@ -8,22 +8,22 @@ export class GetTokenService{
     console.log('get service Initialized....')
   }
   getData(){
-    return this.http.get('http://localhost:8080/api/customers')
+    return this.http.get('http://localhost:8080/api/cards')
       .map(res => res.json());
   }
 
-  postToken(token: string): any{
-      console.log(token)
+  getToken(response: string): any{
+    console.log("token data response in service")
+      console.log(response)
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      return this.http.post('http://localhost:8080/api/customers', JSON.stringify(token), {headers: headers})
+      return this.http.post('http://localhost:8080/api/cards', JSON.stringify(response), {headers: headers})
       .map(res => res.json());
   }
-  getToken(token: string): any{
-      console.log(token)
+  addData(newData: string): any{
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      return this.http.post('http://localhost:8080/api/customers', JSON.stringify(token), {headers: headers})
+      return this.http.post('http://localhost:8080/api/customers', JSON.stringify(newData), {headers: headers})
       .map(res => res.json());
   }
 }

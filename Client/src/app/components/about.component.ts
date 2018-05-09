@@ -5,4 +5,11 @@
    templateUrl: './about.component.html',
 
  })
- export class AboutComponent   {}
+ export class AboutComponent   {
+     name : string;
+
+     constructor(){
+       this.name = 'About';
+     }
+
+ }

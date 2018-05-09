@@ -17,21 +17,15 @@ var GetTokenService = (function () {
         console.log('get service Initialized....');
     }
     GetTokenService.prototype.getData = function () {
-        return this.http.get('http://localhost:8080/api/customers')
+        return this.http.get('http://localhost:8080/api/cards')
             .map(function (res) { return res.json(); });
     };
-    GetTokenService.prototype.postToken = function (token) {
-        console.log(token);
+    GetTokenService.prototype.getToken = function (response) {
+        console.log("token data response in service");
+        console.log(response);
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:8080/api/customers', JSON.stringify(token), { headers: headers })
-            .map(function (res) { return res.json(); });
-    };
-    GetTokenService.prototype.getToken = function (token) {
-        console.log(token);
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:8080/api/customers', JSON.stringify(token), { headers: headers })
+        return this.http.post('http://localhost:8080/api/cards', JSON.stringify(response), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return GetTokenService;

@@ -1,0 +1,79 @@
+
+<h1>Name {{name}}</h1>
+  <p>Email: {{email}}</p>
+  <button (click)="toggleHobbies()">{{showHobbies ? "Hide Hobbies" : "Show Hobbies"}}</button>
+  <div *ngIf ="showHobbies" >
+    <h3>Hobbies:</h3>
+    <ul>
+      <li *ngFor= "let hobby of hobbies; let i=index" >
+          {{hobby}} <button (click)="deleteHobby(i)" >X</button>
+      </li>
+    </ul>
+    <form (submit)= "addHobby(hobby.value)">
+    <label>Add hobby</label><br/>
+    <input type="text" #hobby/><br/>
+    </form>
+  </div>
+  <hr/>
+  <!-------------------------------->
+
+
+
+      <h3>TodoList:</h3>
+    <ul>
+      <li *ngFor= "let task of tasks;" >
+          {{task}}
+      </li>
+    </ul>
+    <form (submit)= "addTask(Newtask.value)">
+      <label>Add task</label><br/>
+      <input type="text" #Newtask/><br/>
+    </form>
+
+    <hr/>
+      <h3>Get Data  From db:</h3>
+      <div *ngFor= "let data of datadb">
+        <h3>{{data.name}}</h3>
+        <p>{{data.email}}</p>
+        <p>{{data.country}}</p>
+        <p>{{data.cus_id}}</p>
+
+
+      </div>
+
+      <script src="https://js.stripe.com/v3/"></script>
+      <form class="well" (submit)="addData($event)"  method="post" id="payment-form"  >
+        <div class="form-group">
+          <label> Name:</label><br/>
+          <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Add name..."><br/>
+          <label> Email:</label><br/>
+          <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Add email..."><br/>
+          <label> Country:</label><br/>
+          <input type="text" [(ngModel)]="country" name="country" class="form-control" placeholder="Add Country name..."><br/>
+          <button (click)="addData($event)"> submit</button>
+        </div>
+      </form>
+    <hr/>
+
+  <label> Todo:</label><br/>
+    {{todo}}<br/>
+  <input type="text" name="todo" [(ngModel)]="todo" /><br/>
+  <hr/>
+  <h3>Edit User</h3>
+  <form>
+    <label> Name:</label><br/>
+    <input type="text" name="name" [(ngModel)]="name" /><br/>
+    <label> Email:</label><br/>
+    <input type="text" name="email" [(ngModel)]="email" /><br/>
+    <label> Card Number:</label><br/>
+    <input type="number" name="cardNum" [(ngModel)]="cardNum" /><br/>
+    <label> Card CVC:</label><br/>
+    <input type="number" name="cardCVC" [(ngModel)]="cardCVC" /><br/>
+    <label> Card Expire Date:</label><br/>
+    <input type="text" name="cardExpDate" [(ngModel)]="cardExpDate" /><br/>
+  </form>
+  <hr/>
+    <form (submit)= "addData(data.name.value)">
+      <label>Name</label><br/>
+      <input type="text" #data.name/><br/>
+    </form>

@@ -9,17 +9,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var posts_service_1 = require("../services/posts.service");
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(postsService) {
+        var _this = this;
+        this.postsService = postsService;
+        this.postsService.getData().subscribe(function (data) {
+            _this.datadb = data;
+        });
     }
+    LoginComponent.prototype.userData = function (event) {
+        var _this = this;
+        event.preventDefault();
+        var userInfo = {
+            name: this.name,
+            email: this.email,
+            password: this.password
+        };
+        console.log(userInfo);
+        this.postsService.addData(userInfo)
+            .subscribe(function (data) {
+            _this.datadb.push(data);
+            // this.first_name ='';
+            // this.last_name ='';
+            // this.email ='';
+            // this.shopName = '';
+        });
+    };
     return LoginComponent;
 }());
 LoginComponent = __decorate([
     core_1.Component({
         selector: 'login',
         templateUrl: './login.component.html',
+        providers: [posts_service_1.PostsService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [posts_service_1.PostsService])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'my-app',
-  template: `
-      <ul>
-        <button><a routerLink="/">Home</a></button>
-        <button><a routerLink="/about">about</a></button>
-        <button><a routerLink="/login">Login/SignUp</a></button>
-      </ul>
-      <hr/>
-      <router-outlet></router-outlet>
-  `,
+  selector: 'app-root',
+  template: `<navbar></navbar>`,
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent  {}
+export class AppComponent {
+  
+}

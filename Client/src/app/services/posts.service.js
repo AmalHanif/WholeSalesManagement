@@ -17,13 +17,25 @@ var PostsService = (function () {
         console.log('post service Initialized....');
     }
     PostsService.prototype.getData = function () {
-        return this.http.get('http://localhost:5000/api/wholeSales')
+        return this.http.get('http://localhost:8080/api/wholeSales')
             .map(function (res) { return res.json(); });
     };
     PostsService.prototype.addData = function (newData) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:5000/api/wholesales', JSON.stringify(newData), { headers: headers })
+        return this.http.post('http://localhost:8080/api/wholeSales', JSON.stringify(newData), { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    // userData(userInfo: string): any{
+    //   var headers = new Headers();
+    //   headers.append('Content-Type', 'application/json');
+    //   return this.http.post('http://localhost:8080/api/wholeSales', JSON.stringify(userInfo), {headers: headers})
+    //   .map(res => res.json());
+    // }
+    PostsService.prototype.openCheckout = function (token) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('http://localhost:8080/api/wholeSales', JSON.stringify(token), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return PostsService;
