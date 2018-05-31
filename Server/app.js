@@ -15,8 +15,10 @@ mongoose.connect('mongodb://localhost/wholeSales');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var cards = require('./routes/cards');
-var supplier = require('./routes/supplier');
+var stocks = require('./routes/stocks');
+var sales = require('./routes/sales');
+var customers = require('./routes/customers');
+var dealers = require('./routes/dealers');
 
 var app = express();
 
@@ -57,8 +59,10 @@ db.once('open', function() {
 // REGISTER OUR ROUTES -------------------------------
 app.use('/', index);
 app.use('/api', users);
-app.use('/api', cards);
-app.use('/api', supplier);
+app.use('/api', stocks);
+app.use('/api', sales);
+app.use('/api', customers);
+app.use('/api', dealers);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

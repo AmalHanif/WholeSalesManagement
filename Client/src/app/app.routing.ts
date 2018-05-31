@@ -9,7 +9,8 @@ import{AboutComponent} from './components/about.component';
 import{DealerComponent} from './components/dealer.component';
 import{SalesComponent} from './components/sales.component';
 import{StockComponent} from './components/stock.component';
-import{SupplierComponent} from './components/supplier.component';
+import{CustomerComponent} from './components/customer.component';
+// import{DialogboxComponent} from './components/dialogbox.component';
 
 const appRoutes: Routes =[
   {
@@ -25,8 +26,8 @@ const appRoutes: Routes =[
     component: DealerComponent
   },
   {
-    path: 'supplier',
-    component: SupplierComponent
+    path: 'customer',
+    component: CustomerComponent
   },
   {
     path: 'stock',

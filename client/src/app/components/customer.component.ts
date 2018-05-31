@@ -3,30 +3,45 @@ import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
 
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
-import { DealerPopupComponent } from './dealerPopup.component';
+import { DialogboxComponent } from './dialogbox.component';
 import 'rxjs/add/operator/map';
 
  @Component({
-   selector: 'dealer',
-   templateUrl: './dealer.component.html',
+   selector: 'customer',
+   templateUrl: './customer.component.html',
   //  providers: [PostsService  ]
  })
 
- export class DealerComponent implements OnInit {
+ export class CustomerComponent implements OnInit {
   dtOptions: any = {};
-  dealerInfo: dealerInfo[] = [];
+  customerInfo: customerInfo[] = [];
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject();
 
   constructor(private  http: Http , private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef) {}
-
+  
+  openSimpleModal() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Add Data',
+      childComponent: SimpleModalComponent,
+      settings: {
+        closeButtonClass: 'close theme-icon-close'
+      },
+      data: {
+        text: '<h2>add data <h2/>',
+        input: ''
+      }
+    });
+  }
   openCustomModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Add New dealer __________________ ',
-      childComponent: DealerPopupComponent,
+      title: 'Add New Customer __________________ ',
+      childComponent: DialogboxComponent,
       settings: {
         bodyClass:'mdb-color modal-body',
+        modalClass:'modal ngx-modal',
+        modalDialogClass: 'modal-dialog modal-dialog-center',
         closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
       },
       // actionButtons: [
@@ -58,10 +73,10 @@ import 'rxjs/add/operator/map';
          'print',
         ]
       };
-      this.http.get('http://localhost:8000/api/wholeSales/dealers')
+      this.http.get('http://localhost:8000/api/wholeSales/customers')
       .map(this.extractData)
       .subscribe(data => {
-          this.dealerInfo = data;
+          this.customerInfo = data;
           console.log(data)
           // Calling the DT trigger to manually render the table
           this.dtTrigger.next();
@@ -75,29 +90,30 @@ import 'rxjs/add/operator/map';
     }
   } 
 
-export class dealerInfo{
+export class customerInfo{
   id: Number;
-  dName: String;
-  company: String;
-  purchaseProducts:String;
-  purchasePrice:Number;
-  purchasingDate:Date;
+  cName: String;
+  cAddress: String;
+  salesProducts:String;
+  originalPrice:Boolean;
+  salesPrice:Number;
+  orderDate:Date;
 }
 
 interface IModalDialogSettings {
-  // overlayClass: string;
-  // overlayAnimationTriggerClass: string;
-  // modalClass: string;
-  // modalAnimationTriggerClass: string;
-  // contentClass: string;
-  // headerClass: string;
-  // headerTitleClass: string;
-  // closeButtonClass: string;
+  overlayClass: string;
+  overlayAnimationTriggerClass: string;
+  modalClass: string;
+  modalAnimationTriggerClass: string;
+  contentClass: string;
+  headerClass: string;
+  headerTitleClass: string;
+  closeButtonClass: string;
   closeButtonTitle: string;
   bodyClass: string;
-  // footerClass: string;
-  // alertClass: string;
-  // alertDuration: number;
-  // buttonClass: string;
-  // notifyWithAlert: boolean;
+  footerClass: string;
+  alertClass: string;
+  alertDuration: number;
+  buttonClass: string;
+  notifyWithAlert: boolean;
 }

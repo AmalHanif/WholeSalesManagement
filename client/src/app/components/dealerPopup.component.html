@@ -1,0 +1,45 @@
+<!-- Material form register -->
+<form class="well" (submit)="addDealerData($event)"  method="post" id="dealer-form" > 
+<!-- Material input text -->
+    <div class="md-form" style="margin-top: 0;">
+        
+        <i class="fa fa-user prefix grey-text"></i>
+        <label>Dealer Name</label><br/>
+        <input type="text" [(ngModel)]="dName" name="dName" id="dName" class="form-control">
+        
+    </div>
+
+    <!-- Material input email -->
+    <div class="md-form" style="margin-top: 0;">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <label>Company</label><br/>
+        <input type="text" [(ngModel)]="company" name="company" class="form-control">
+        
+    </div>
+    <!-- Material input purchase Product -->
+    <div class="md-form" style="margin-top: 0;">
+        <i class="fa fa-shopping-cart  prefix  grey-text" aria-hidden="true"></i>
+        <label>Purchase Product</label><br/>
+        <input type="text"  [(ngModel)]="purchaseProducts" name="purchaseProduct" class="form-control">
+        
+    </div>
+        <!-- Material input purchase price -->
+    <div class="md-form" style="margin-top: 0;">
+        <i class="fa fa-rupee  prefix  grey-text" aria-hidden="true"></i>
+        <label>purchase Price</label><br/>
+        <input type="number" [(ngModel)]="purchasePrice" name="purchasePrice" class="form-control">
+        
+    </div>
+    
+    <div class="md-form" style="margin-top: 0;">
+        <i class="fa fa-calendar  prefix  grey-text" aria-hidden="true"></i>
+        <label>Purchasing Date</label><br/>
+        <input type="date" [(ngModel)]="purchasingDate" name="purchasingDate" class="form-control">
+        
+    </div>
+    <div class="text-center mt-4">
+        <button href="/dealer" (click)="addDealerData($event)" class="btn btn-primary" type="submit">Save</button>
+    </div>
+</form>
+<!-- Material form register -->
+<!-- <p>This came from parent: <b>{{parentInfo}}</b></p> -->

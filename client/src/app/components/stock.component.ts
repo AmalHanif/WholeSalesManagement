@@ -1,84 +1,79 @@
-import { Component } from '@angular/core';
-import { EditableTableService } from 'ng-editable-table/editable-table/editable-table.service';
+import { Component, OnInit, ViewContainerRef    } from '@angular/core';
+// import { EditableTableService } from 'ng-editable-table/editable-table/editable-table.service';
+import { Http, Response } from '@angular/http';
+import { Subject } from 'rxjs';
 
+import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { StockPopupComponent } from './stockPopup.component';
+import 'rxjs/add/operator/map';
 @Component({
   moduleId: module.id,
   selector: 'stock',
   templateUrl: './stock.component.html',
   // styleUrls: ['stripe-form.component.css']
 })
-export class StockComponent {
-  name : string;
-  tableHeaders = ['Customer Name', 'Customer Address', 'Customer Type','Sale Product', 'Sales Price', 'Order Date'];
-  tableRowsWithId = [
-    [1, 'Asadds', 'MainBsdsdsazar', true, '5 isdasdastem', '3604340', "25/15/2018"]
-  ];
-  dataType = ['string', 'string', Boolean, 'string', Number , Date ];
-    
-  constructor(private service: EditableTableService) {
-  }
-  
-  ngOnInit() {
-    this.service.createTableWithIds(this.tableHeaders, this.tableRowsWithId, this.dataType);
+export class StockComponent  implements OnInit  {
+  dtOptions: any = {};
+  stockInfo: StockInfo[] = [];
+  // We use this trigger because fetching the list of persons can be quite long,
+  // thus we ensure the data is fetched before rendering
+  dtTrigger: Subject<any> = new Subject();
+
+  constructor(private http: Http , private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef) {}
+
+  openCustomModal() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Add New stock __________________ ',
+      childComponent: StockPopupComponent,
+      settings: {
+        bodyClass:'mdb-color modal-body',
+        closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
+      }, 
+    });
   }
 
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      // Declare the use of the extension in the dom parameter
+      dom: 'Bfrtip',
+      // Configure the buttons
+      buttons: [
+        'colvis',
+        'copy',
+        'csv',
+        'print'
+      ]
+    };
+    this.http.get('http://localhost:8000/api/wholeSales/stocks')
+    .map(this.extractData)
+    .subscribe(data => {
+        this.stockInfo = data;
+        console.log(data)
+        // Calling the DT trigger to manually render the table
+        this.dtTrigger.next();
+    });
+  }
+
+  private extractData(res: Response) {
+    const body = res.json();
+    console.log(body)
+    return body || {};
+  }
 }
+ 
 
-
-
-
-
-
-
-// import { Component } from '@angular/core';
-// import { GetTokenService } from '../services/getToken.service';
-//
-// @Component({
-//   moduleId: module.id,
-//   selector: 'stripe-form',
-//   templateUrl: 'stripe-form.component.html',
-//   // styleUrls: ['stripe-form.component.css']
-//     providers: [GetTokenService ]
-// })
-// export class StripeFormComponent {
-//   token:string;
-//   datadb:String[];
-//   message:String[];
-//
-//   constructor{
-//     this.message = ['tokenID', 'card', 'cvc']
-//   }
-//
-  // openCheckout(getmessage: MouseEvent): any{
-  //   var handler = (<any>window).StripeCheckout.configure({
-  //    key: 'pk_test_Dlf2JJqlhlvw4dpaIcWmWDPh',
-  //     locale: 'auto',
-  //     token: function (token: any) {
-  //       // You can access the token ID with `token.id`.
-  //       // Get the token ID to your server-side code for use.
-  //       //
-  //       console.log(token);
-  //       console.log(this.token);
-  //
-  //       this.message= token
-  //
-  //     }
-  //
-  //   });
-  //
-  //   this.datadb.push(this.message));
-  //   console.log(this.message);
-  //   // this.tokenService.openCheckout(this.message)
-  //   // .subscribe((data: string): any =>{
-  //   //     this.datadb.push(data);
-  //   //     console.log("datadb token");
-  //   //     console.log(this.datadb)
-  //   // });
-  //
-  //   handler.open({
-  //     name: 'Demo Site',
-  //     description: '2 widgets',
-  //     amount: 2000
-  //   });
-  //
-  // }
+export class StockInfo{
+  pName: String;
+  pBrand: String;
+  pQuantity:String;
+  pCost:Number;
+  pPrice:Number;
+  purchaseDate:Date;
+}
+interface IModalDialogSettings {
+ 
+  closeButtonTitle: string;
+  bodyClass: string;
+}

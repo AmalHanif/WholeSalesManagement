@@ -9,13 +9,13 @@ export class PostsService{
     }
 
     getData(){
-        return this.http.get('http://localhost:8080/api/wholeSales')
+        return this.http.get('http://localhost:8000/api/wholeSales/users')
         .map(res => res.json());
     }
     addData(newData: string): any{
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:8080/api/wholeSales', JSON.stringify(newData), {headers: headers})
+        return this.http.post('http://localhost:8000/api/wholeSales', JSON.stringify(newData), {headers: headers})
         .map(res => res.json());
     }
     // userData(userInfo: string): any{
@@ -24,10 +24,4 @@ export class PostsService{
     //   return this.http.post('http://localhost:8080/api/wholeSales', JSON.stringify(userInfo), {headers: headers})
     //   .map(res => res.json());
     // }
-    openCheckout(token: string): any{
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:8080/api/wholeSales', JSON.stringify(token), {headers: headers})
-        .map(res => res.json());
-    }
 }

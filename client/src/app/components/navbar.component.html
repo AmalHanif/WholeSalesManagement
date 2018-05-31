@@ -1,10 +1,11 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark mdb-color darken-3">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark mb-5 mdb-color darken-3">
     
 <!-- Navbar brand -->
-<logo>
-    <!-- <img src="./img/khatta.jpg" alt="logo"  height="42" width="42"> -->
-    <a class="navbar-brand" href="#">{{name}}</a></logo>
+    <logo>
+        <img src="assets\img\logo.jpg" alt="logo"  height="50" width="50">
+        <a class="navbar-brand" href="#">{{name}}</a>
+    </logo>
 
 <!-- Collapsible content -->
 <links>
@@ -18,7 +19,7 @@
          <a routerLink="/dealer" class="nav-link waves-light" mdbWavesEffect>Dealer</a>
      </li>
      <li class="nav-item">
-         <a routerLink="/supplier" class="nav-link waves-light" mdbWavesEffect>Supplier</a>
+         <a routerLink="/customer" class="nav-link waves-light" mdbWavesEffect>Customer</a>
      </li>
      <li class="nav-item">
         <a routerLink="/stock" class="nav-link waves-light" mdbWavesEffect>Stock</a>
@@ -27,30 +28,14 @@
         <a routerLink="/sales" class="nav-link waves-light" mdbWavesEffect>Sales</a>
     </li>
 
-     <!-- Dropdown -->
-     <li class="nav-item dropdown" dropdown>
-         <a dropdownToggle mdbWavesEffect type="button" routerLink="" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-         Basic dropdown<span class="caret"></span></a>
-         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-             <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-             <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-             <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-             <div class="divider dropdown-divider"></div>
-             <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-         </div>
-     </li>
-
  </ul>
  <!-- Links -->
 
 <!-- Search form -->
  <form class="form-inline waves-light" mdbWavesEffect>
-     <div class="md-form mt-0">
-         <input class="form-control mr-sm-2" type="text" placeholder="Search">
-     </div>
      <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a routerLink="/signup" class="nav-link waves-light" mdbWavesEffect>SignUp/Login</a>
+            <a routerLink="/signup" class="fa fa-sign-in mr-1 nav-link waves-light" mdbWavesEffect> Log In</a>
         </li>
      </ul>
  </form>
@@ -59,5 +44,7 @@
 <!-- Collapsible content -->
 
 </mdb-navbar>
+<!-- <div class="panel panel-default" [style.background]="'url(assets/img/bg.jpg)'"> -->
+    <router-outlet></router-outlet>
+<!-- </div> -->
 
-<router-outlet></router-outlet>

@@ -1,59 +1,61 @@
 var express = require('express');
 var router = express.Router();
-var User = require('..//models/userInfo');
+var Customer = require('..//models/customerInfo');
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
-    console.log('Something is happening.');
+    console.log('Customer is active.');
     next(); // make sure we go to the next routes and don't stop here
 });
 
-/* GET users listing. */
+/* GET customers listing. */
 router.get('/', function(req, res, next) {
   // res.send('respond with a resource');
   res.json({ message: 'hooray! welcome to our api!' });
 });
 
-router.route('/wholeSales')
+router.route('/wholeSales/customers')
 
-  // create a user (accessed at POST http://localhost:8080/api/users)
+//   create a customer (accessed at POST http://localhost:8080/api/customers)
     .post(function(req, res) {
-        var userdb = new User(req.body);      // create a new instance of the Customer model
-            console.log('user database');
-            console.log(userdb);
+        console.log(res)
+        var customerdb = new Customer(req.body);      // create a new instance of the Customer model
+            console.log('customer database');
+            console.log(customerdb);
 
-        User.create(userdb, function(err,user) {
+        Customer.create(customerdb, function(err,customer) {
             if (err)
                 res.send(err);
-            res.json(userdb);
-            console.log(userdb);
+            res.json(customerdb);
+            console.log(customerdb);
         });
     })
-    // get all the users (accessed at GET http://localhost:8080/api/users)
+    // get all the customers (accessed at GET http://localhost:8080/api/customers)
 
     .get(function(req, res) {
-       User.find(function(err, userInfo) {
-           if (err)
-               res.send(err);
+        Customer.find(function(err, customerInfo) {
+            if (err)
+                res.send(err);
+            console.log(customerInfo)
+            res.json(customerInfo);
+        });
+    });
 
-           res.json(userInfo);
-       });
-     });
-
-// router.route('/wholeSales/:user_id')
-//    // get the customer with that id (accessed at GET http://localhost:8080/api/userInfo/:user_id)
+ 
+// router.route('/wholeSales/:customer_id')
+//    // get the customer with that id (accessed at GET http://localhost:8080/api/customerInfo/:customer_id)
 //    .get(function(req, res) {
-//        User.findById(req.params.user_id, function(err, userInfo) {
+//        Customer.findById(req.params.customer_id, function(err, customerInfo) {
 //            if (err)
 //                res.send(err);
-//            res.json(userInfo);
+//            res.json(customerInfo);
 //        });
 //    })
 //    .put(function(req, res) {
 
 //         // use our customer model to find the customer we want
-//         Customer.findById(req.params.user_id, function(err, customer) {
+//         Customer.findById(req.params.customer_id, function(err, customer) {
 
 //             if (err)
 //                 res.send(err);
@@ -73,7 +75,7 @@ router.route('/wholeSales')
 //     // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
 //     .delete(function(req, res) {
 //         Customer.remove({
-//             _id: req.params.user_id
+//             _id: req.params.customer_id
 //         }, function(err, customer) {
 //             if (err)
 //                 res.send(err);

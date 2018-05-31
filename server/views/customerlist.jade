@@ -1,9 +1,0 @@
-extends layout
-
-block content
-  h1.
-    customer List
-  ul
-    each customer, i in customerlist
-      li
-        a(href="mailto:#{customer.email}")= customer.name
