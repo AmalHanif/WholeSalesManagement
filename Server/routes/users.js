@@ -26,8 +26,8 @@ router.route('/wholeSales')
         User.create(userdb, function(err,user) {
             if (err)
                 res.send(err);
-            res.json(userdb);
-            console.log(userdb);
+            res.send(user);
+            console.log(user);
         });
     })
     // get all the users (accessed at GET http://localhost:8080/api/users)
@@ -41,15 +41,17 @@ router.route('/wholeSales')
        });
      });
 
-// router.route('/wholeSales/:user_id')
-//    // get the customer with that id (accessed at GET http://localhost:8080/api/userInfo/:user_id)
-//    .get(function(req, res) {
-//        User.findById(req.params.user_id, function(err, userInfo) {
-//            if (err)
-//                res.send(err);
-//            res.json(userInfo);
-//        });
-//    })
+router.route('/wholeSales/user_id')
+   // get the customer with that id (accessed at GET http://localhost:8080/api/userInfo/:user_id)
+   .post(function(req, res) {
+       console.log(req.body)
+       User.findById(req.body.email, function(err, userInfo) {
+           if (err)
+               res.send(err);
+           res.json(userInfo);
+           console.log("result = "+userInfo)
+       });
+   })
 //    .put(function(req, res) {
 
 //         // use our customer model to find the customer we want

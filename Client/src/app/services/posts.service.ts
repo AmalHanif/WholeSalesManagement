@@ -9,13 +9,19 @@ export class PostsService{
     }
 
     getData(){
-        return this.http.get('http://localhost:8000/api/wholeSales/users')
+        return this.http.get('http://localhost:8000/api/wholeSales')
         .map(res => res.json());
     }
     addData(newData: string): any{
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post('http://localhost:8000/api/wholeSales', JSON.stringify(newData), {headers: headers})
+        .map(res => res.json());
+    }
+    findData(newData: string): any{
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('http://localhost:8000/api/wholeSales/user_id', JSON.stringify(newData), {headers: headers})
         .map(res => res.json());
     }
     // userData(userInfo: string): any{

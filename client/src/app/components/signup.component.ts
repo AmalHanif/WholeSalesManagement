@@ -7,6 +7,7 @@ import { PostsService } from '../services/posts.service';
   providers: [PostsService ]
 })
 export class SignInComponent   {
+  id:number;
   name:string;
   email:string;
   password:string;
@@ -20,7 +21,9 @@ export class SignInComponent   {
  
   userData(event: MouseEvent): any{
     event.preventDefault();
+    console.log(this.datadb.length)
     var userInfo:any = {
+      id:this.datadb.length,
       name:this.name,
       email:this.email,
       password:this.password
