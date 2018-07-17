@@ -13,18 +13,22 @@
         <th>Original Price</th>
         <th>Sales Price</th>
         <th>OrderDate</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let customer of customerInfo">
-        <td>{{customer.id }}</td>
+        <td>{{customer.cID }}</td>
         <td>{{customer.cName }}</td>
         <td>{{customer.cAddress }}</td>
         <td>{{customer.salesProducts }}</td>
         <td>{{customer.originalPrice }}</td>
         <td>{{customer.salesPrice }}</td>
-        <td>{{customer.orderDate}}</td>
-
+        <td>{{customer.orderDate | date: 'dd/MM/yyyy'}}</td>
+        <td>
+            <button class="btn btn-outline-info" type="button" (click)="editData(customer)">Edit</button>
+            <button class="btn btn-outline-danger" type="button" (click)="delData(customer._id)">Delete</button>
+          </td>
       </tr>
     </tbody>
     </table>

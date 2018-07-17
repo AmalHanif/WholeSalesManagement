@@ -12,16 +12,21 @@
         <th>purchase Products</th>
         <th>purchase Price</th>
         <th>Purchasing Date</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let dealer of dealerInfo">
-        <td>{{dealer.id }}</td>
+        <td>{{dealer.dID }}</td>
         <td>{{dealer.dName }}</td>
         <td>{{dealer.company }}</td>
         <td>{{dealer.purchaseProducts }}</td>
         <td>{{dealer.purchasePrice }}</td>
-        <td>{{dealer.purchasingDate}}</td>
+        <td>{{dealer.purchasingDate| date: 'dd/MM/yyyy'}}</td>
+        <td>
+          <button class="btn btn-outline-info" type="button" (click)="editData(dealer)">Edit</button>
+          <button class="btn btn-outline-danger" type="button" (click)="delData(dealer._id)">Delete</button>
+        </td>
 
       </tr>
     </tbody>

@@ -13,18 +13,22 @@
           <th>Product Cost</th>
           <th>Product Price for sale</th>
           <th>Purchasing Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let stock of stockInfo">
-          <td>{{stock.id }}</td>
+          <td>{{stock.pID}}</td>
           <td>{{stock.pName }}</td>
           <td>{{stock.pBrand }}</td>
           <td>{{stock.pQuantity }}</td>
           <td>{{stock.pCost}}</td>
           <td>{{stock.pPrice }}</td>
-          <td>{{stock.purchaseDate}}</td>
-  
+          <td>{{stock.purchaseDate| date: 'dd/MM/yyyy'}}</td>
+          <td>
+            <button class="btn btn-outline-info" type="button" (click)="editData(stock)">Edit</button>
+            <button class="btn btn-outline-danger" type="button" (click)="delData(stock._id)">Delete</button>
+          </td>
         </tr>
       </tbody>
       </table>

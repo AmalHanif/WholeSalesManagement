@@ -1,9 +1,12 @@
+
 import { Component,OnInit, ViewContainerRef  } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { DialogboxComponent } from './dialogbox.component';
+import { CustomerEditComponent} from './customer-edit.component';
 import 'rxjs/add/operator/map';
 
  @Component({
@@ -44,20 +47,36 @@ import 'rxjs/add/operator/map';
         modalDialogClass: 'modal-dialog modal-dialog-center',
         closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
       },
-      // actionButtons: [
-      //   {
-      //     text: 'Cancel',
-      //     buttonClass: 'btn btn-danger',
-      //     onAction: () => new Promise((resolve: any) => {
-      //       setTimeout(() => {
-      //         resolve();
-      //       }, 20);
-      //     })
-      //   },
-      // ],  
     });
   }
 
+  editData(customerInfo){
+    
+        this.modalDialogService.openDialog(this.viewContainer, {
+         
+          title: 'Update customer Data__________________ ',
+          childComponent: CustomerEditComponent ,
+          data: customerInfo,
+          settings: {
+            bodyClass:'mdb-color modal-body',
+            closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
+          },
+        });
+      }
+    
+      delData(id){
+        console.log(id)
+        this.http.delete('http://localhost:8000/api/wholeSales/customers/'+id)
+        .subscribe(res => {
+            console.log(res)
+            // this.router.navigate(['../customer']);
+            window.location.href = "/customer";
+          }, (err) => {
+            console.log("Error = "+err);
+          }
+        );
+      }
+    
   
   ngOnInit(): void {
     this.dtOptions = {
@@ -91,7 +110,7 @@ import 'rxjs/add/operator/map';
   } 
 
 export class customerInfo{
-  id: Number;
+  cID: Number;
   cName: String;
   cAddress: String;
   salesProducts:String;
@@ -100,20 +119,10 @@ export class customerInfo{
   orderDate:Date;
 }
 
-interface IModalDialogSettings {
-  overlayClass: string;
-  overlayAnimationTriggerClass: string;
-  modalClass: string;
-  modalAnimationTriggerClass: string;
-  contentClass: string;
-  headerClass: string;
-  headerTitleClass: string;
+interface IModalDialogSettings<T>
+ {
   closeButtonClass: string;
   closeButtonTitle: string;
   bodyClass: string;
-  footerClass: string;
-  alertClass: string;
-  alertDuration: number;
-  buttonClass: string;
-  notifyWithAlert: boolean;
+  data:T;
 }

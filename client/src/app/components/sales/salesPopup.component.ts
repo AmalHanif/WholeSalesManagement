@@ -1,6 +1,6 @@
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { Component, ComponentRef } from '@angular/core';
-import { AddService } from '../services/add.service';
+import { AddService } from '../../services/add.service';
 
 @Component({
   selector: 'salesPopup',
@@ -10,6 +10,7 @@ import { AddService } from '../services/add.service';
 })
 export class SalesPopupComponent implements IModalDialog {
   parentInfo: string;
+  sID: Number;
   cName: String;
   cAddress: String;
   pName: String;
@@ -18,16 +19,21 @@ export class SalesPopupComponent implements IModalDialog {
   pSold:Number;
   pPrice:Number
   soldDate:Date;
-  Salesdb: String[];
+  salesdb: String[];
 
-  constructor(private AddService: AddService){}
-
+  constructor(private AddService: AddService){{
+    this.AddService.getSalesData().subscribe(data =>{
+      this.salesdb= data;
+    });
+  }
+}
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
   }
   addSalesData(event: MouseEvent): any{
     event.preventDefault();
     var newData:any = {
+        sID:this.salesdb.length,
         cName: this.cName,
         cAddress: this.cAddress,
         pName:this.pName,
@@ -40,9 +46,10 @@ export class SalesPopupComponent implements IModalDialog {
       console.log(newData);
     this.AddService.addSalesData(newData)
     .subscribe((data: string): any =>{
-        this.Salesdb.push(data);
+        this.salesdb.push(data);
         console.log(data)
     });
+    window.location.href = "/sales";
   }
 }
  

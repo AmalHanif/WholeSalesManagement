@@ -1,0 +1,64 @@
+<form class="well" (submit)="editSalesData(parentInfo._id,parentInfo)"  method="post" id="customer-form" > 
+    <!-- Material input text -->
+    <div class="md-form"  style="margin-top: 0;">
+       
+        <i class="fa fa-user prefix grey-text"></i>
+        <label >Customer Name</label>
+        <input type="text" [(ngModel)]="parentInfo.cName" name="cName" id="cName" class="form-control">
+        
+    </div>
+    
+       <div class="md-form" >
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <label >Customer Address</label>
+        <input type="text" [(ngModel)]="parentInfo.cAddress" name="cAddress" class="form-control">
+        
+    </div>
+    <div class="md-form"  style="margin-top: 0;">
+        
+            <i class="fa fa-user prefix grey-text"></i>
+            <label>Product Name</label>
+            <input type="text" [(ngModel)]="parentInfo.pName" name="pName" id="pName" class="form-control">
+            
+        </div>
+        
+    <div class="md-form" >
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <label>Product Brand</label>
+        <input type="text" [(ngModel)]="parentInfo.pBrand" name="pBrand" class="form-control">
+    
+    </div>
+      
+    <div class="md-form" >
+        <i class="fa fa-shopping-cart  prefix  grey-text" aria-hidden="true"></i>
+        <label >Product Quantity</label>
+        <input type="text"  [(ngModel)]="parentInfo.pQuantity" name="pQuantity" class="form-control">
+        
+    </div>
+        
+        <div class="md-form" >
+        <i class="fa fa-money  prefix  grey-text" aria-hidden="true"></i>
+        <label >Sold Product</label>
+        <input type="number"[(ngModel)]="parentInfo.pSold" name="pSold" class="form-control">
+        
+    </div>
+
+    <div class="md-form" >
+        <i class="fa fa-rupee  prefix  grey-text" aria-hidden="true"></i>
+        <label>product Price</label>
+        <input type="number" [(ngModel)]="parentInfo.pPrice" name="pPrice" class="form-control">
+        
+    </div>
+    
+    <div class="md-form" >
+        <i class="fa fa-calendar  prefix  grey-text" aria-hidden="true"></i>
+        <label >Sold Date</label>
+        <input type="date" [(ngModel)]="parentInfo.soldDate" name="soldDate" class="form-control">
+        
+    </div>
+    <div class="text-center mt-4">
+        <button href="/customer" class="btn btn-primary" type="submit">Save</button>
+    </div>
+</form>
+
+<!-- <p>This came from parent: <b>{{parentInfo}}</b></p> -->

@@ -1,6 +1,6 @@
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { Component, ComponentRef } from '@angular/core';
-import { AddService } from '../services/add.service';
+import { AddService } from '../../services/add.service';
 
 @Component({
   selector: 'dialogbox',
@@ -10,6 +10,7 @@ import { AddService } from '../services/add.service';
 })
 export class DialogboxComponent implements IModalDialog {
   parentInfo: string;
+  cID: Number;
   cName: string;
   cAddress: string;
   originalPrice:Number;
@@ -18,14 +19,19 @@ export class DialogboxComponent implements IModalDialog {
   orderDate:Date;
   customerdb: String[];
 
-  constructor(private AddService: AddService){}
-
+  constructor(private AddService: AddService){
+    this.AddService.getCustomerData().subscribe(data =>{
+      this.customerdb= data;
+    });
+  }
+  
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
   }
   addCustomerData(event: MouseEvent): any{
     event.preventDefault();
     var newData:any = {
+        cID: this.customerdb.length,
         cName: this.cName,
         cAddress: this.cAddress,
         originalPrice:this.originalPrice,
@@ -39,6 +45,7 @@ export class DialogboxComponent implements IModalDialog {
         this.customerdb.push(data);
         console.log(data)
     });
+    window.location.href = "/customer";
   }
 }
  

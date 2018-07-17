@@ -1,6 +1,6 @@
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { Component, ComponentRef } from '@angular/core';
-import { AddService } from '../services/add.service';
+import { AddService } from '../../services/add.service';
 
 @Component({
   selector: 'dealerPopup',
@@ -10,6 +10,7 @@ import { AddService } from '../services/add.service';
 })
 export class DealerPopupComponent implements IModalDialog {
   parentInfo: string;
+  dId: number;
   dName: string;
   company: string;
   purchaseProducts:string;
@@ -17,7 +18,12 @@ export class DealerPopupComponent implements IModalDialog {
   purchasingDate:Date;
   dealerdb: String[];
 
-  constructor(private AddService: AddService){}
+  constructor(private AddService: AddService){{
+      this.AddService.getDealerData().subscribe(data =>{
+        this.dealerdb= data;
+      });
+    }
+  }
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
@@ -25,6 +31,7 @@ export class DealerPopupComponent implements IModalDialog {
   addDealerData(event: MouseEvent): any{
     event.preventDefault();
     var newData:any = {
+        dID: this.dealerdb.length,
         dName: this.dName,
         company: this.company,
         purchaseProducts:this.purchaseProducts,
@@ -37,6 +44,7 @@ export class DealerPopupComponent implements IModalDialog {
         this.dealerdb.push(data);
         console.log(data)
     });
+    window.location.href = "/dealer";
   }
 }
  

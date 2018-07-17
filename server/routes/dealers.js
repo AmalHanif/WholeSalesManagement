@@ -40,8 +40,42 @@ router.route('/wholeSales/dealers')
             console.log(dealerInfo)
             res.json(dealerInfo);
         });
+    })
+    router.route('/wholeSales/dealers/:dealer_id')
+       .put(function(req, res) {
+        // use our dealer model to find the dealer we want
+        Dealer.findByIdAndUpdate(req.params.dealer_id,req.body, function(err, dealer) {
+            
+            dealer.dID=req.body.dID;
+            dealer.dName=req.body.dName
+            dealer.company=req.body.company
+            dealer.purchaseProducts=req.body.purchaseProducts
+            dealer.purchasePrice=req.body.purchasePrice
+          
+            if (err)
+                res.send(err);
+        
+            // save the dealer
+            dealer.save(function(err,dealer) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'dealer updated!' });
+            });
+
+        });
+    })
+    //   delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
+    .delete(function(req, res) {
+        console.log("db request"+req.params.dealer_id)
+        Dealer.remove({
+            _id: req.params.dealer_id
+        }, function(err, dealerInfo) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
     });
-
-
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import { IModalDialog, IModalDialogOptions } from 'ngx-modal-dialog';
 import { Component, ComponentRef } from '@angular/core';
-import { AddService } from '../services/add.service';
+import { AddService } from '../../services/add.service';
 
 
 @Component({
@@ -19,7 +19,12 @@ export class StockPopupComponent implements IModalDialog {
     purchaseDate:Date;
     stockdb: String[];
 
-  constructor(private AddService: AddService){}
+    constructor(private AddService: AddService){{
+      this.AddService.getSalesData().subscribe(data =>{
+        this.stockdb= data;
+      });
+    }
+  }
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
     this.parentInfo = options.data;
@@ -27,6 +32,7 @@ export class StockPopupComponent implements IModalDialog {
   addStockData(event: MouseEvent): any{
     event.preventDefault();
     var newData:any = {
+        pID:this.stockdb.length,
         pName: this.pName,
         pBrand: this.pBrand,
         pQuantity:this.pQuantity,
@@ -40,6 +46,7 @@ export class StockPopupComponent implements IModalDialog {
         this.stockdb.push(data);
         console.log(data)
     });
+    window.location.href = "/stock";
   }
 }
  

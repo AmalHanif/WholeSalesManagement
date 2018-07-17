@@ -15,11 +15,12 @@
         <th>Product Price</th>
         <th>Product Sold Price</th>
         <th>Sold Date</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let sales of salesInfo">
-        <td>{{sales.id }}</td>
+        <td>{{sales.sID}}</td>
         <td>{{sales.cName }}</td>
         <td>{{sales.cAddress }}</td>
         <td>{{sales.pName }}</td>
@@ -27,8 +28,10 @@
         <td>{{sales.pQuantity }}</td>
         <td>{{sales.pPrice }}</td>
         <td>{{sales.pSold}}</td>
-        <td>{{sales.soldDate}}</td>
-
+        <td>{{sales.soldDate| date: 'dd/MM/yyyy'}}</td>
+        <td><button class="btn btn-outline-info" type="button" (click)="editData(sales)">Edit</button>
+            <button class="btn btn-outline-danger" type="button" (click)="delData(sales._id)">Delete</button>
+          </td>
       </tr>
     </tbody>
     </table>

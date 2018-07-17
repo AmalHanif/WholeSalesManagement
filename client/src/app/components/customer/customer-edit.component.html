@@ -1,0 +1,52 @@
+<!-- Material form register -->
+<form class="well" (submit)="editCustomerData(parentInfo._id,parentInfo)"  method="put" id="customer-form" > 
+    <!-- Material input text -->
+    <div class="md-form"  style="margin-top: 0;">
+        
+        <i class="fa fa-user prefix grey-text"></i>
+        <label for="materialFormRegisterNameEx">Customer Name</label><br/>
+        <input type="text" [(ngModel)]="parentInfo.cName" name="cName" id="cName" class="form-control">
+        
+    </div>
+
+    <!-- Material input email -->
+    <div class="md-form" >
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <label for="materialFormRegisterEmailEx">Customer Address</label><br/>
+        <input type="text" [(ngModel)]="parentInfo.cAddress" name="cAddress" class="form-control">
+        
+    </div>
+    <!-- Material input sales Product -->
+    <div class="md-form" >
+        <i class="fa fa-shopping-cart  prefix  grey-text" aria-hidden="true"></i>
+        <label for="materialFormRegisterPasswordEx">Sales Product</label><br/>
+        <input type="text"  [(ngModel)]="parentInfo.salesProducts" name="salesProduct" class="form-control">
+        
+    </div>
+        <!-- Material input Orignal -->
+        <div class="md-form" >
+        <i class="fa fa-money  prefix  grey-text" aria-hidden="true"></i>
+        <label for="materialFormRegisterPasswordEx">Orignal Price</label><br/>
+        <input type="number"[(ngModel)]="parentInfo.originalPrice" name="originalPrice" class="form-control">
+        
+    </div>
+        <!-- Material input sales price -->
+    <div class="md-form" >
+        <i class="fa fa-rupee  prefix  grey-text" aria-hidden="true"></i>
+        <label for="materialFormContactSubjectEx">Sales Price</label><br/>
+        <input type="number" [(ngModel)]="parentInfo.salesPrice" name="salesPrice" class="form-control">
+        
+    </div>
+    
+    <div class="md-form" >
+        <i class="fa fa-calendar  prefix  grey-text" aria-hidden="true"></i>
+        <label for="materialFormRegisterPasswordEx">Date</label><br/>
+        <input type="date" [(ngModel)]="parentInfo.orderDate" name="orderDate" id="materialFormRegisterPasswordEx" class="form-control">
+        
+    </div>
+    <div class="text-center mt-4">
+        <button href="/customer" (click)="addCustomerData($event)" class="btn btn-primary" type="submit">Save</button>
+    </div>
+</form>
+
+    

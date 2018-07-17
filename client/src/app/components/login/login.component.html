@@ -16,16 +16,16 @@
           <div class="form-group">
             <div class="md-form d-flex">
                 <i class="fa fa-envelope prefix grey-text"></i>
-                <input mdbInputDirective type="email" [(ngModel)]="email" data-error="wrong email" data-success="right email" class="form-control" id="form9" name="email">
-                <label for="form9">Type your e-mail</label>
+                <input mdbInputDirective type="text" [(ngModel)]="username" data-error="wrong username" data-success="right username" class="form-control" id="form9" name="username">
+                <label for="form9">Enter User Name</label>
             </div>
             <div class="md-form d-flex">
                 <i class="fa fa-lock prefix grey-text"></i>
                 <input mdbInputDirective type="password" [(ngModel)]="password" data-error="wrong password" data-success="right password" class="form-control" id="form10" name="password">
-                <label for="form10">Type your password</label>
+                <label for="form10">Enter password</label>
             </div>
             <div class="text-center">
-                <input type="submit" routerLink="/home" (click)="userData($event)" class="btn btn-deep-orange waves-light" mdbWavesEffect value="Login">
+                <input type="submit" class="btn btn-deep-orange waves-light" mdbWavesEffect value="Login">
             </div>
             <p>Have an Account?<span routerLink="/signup">Sign Up</span></p>
               

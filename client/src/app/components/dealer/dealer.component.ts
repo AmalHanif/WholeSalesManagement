@@ -1,49 +1,67 @@
-import { Component,OnInit, ViewContainerRef  } from '@angular/core';
+import { Component, OnInit, ViewContainerRef,  Renderer } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { DealerPopupComponent } from './dealerPopup.component';
+import { DealerEditComponent} from './dealer-edit.component';
 import 'rxjs/add/operator/map';
-
+ 
  @Component({
    selector: 'dealer',
-   templateUrl: './dealer.component.html',
-  //  providers: [PostsService  ]
+   templateUrl: './dealer.component.html'
  })
 
- export class DealerComponent implements OnInit {
+ export class DealerComponent implements OnInit{
   dtOptions: any = {};
   dealerInfo: dealerInfo[] = [];
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private  http: Http , private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef) {}
+  constructor(private  http: Http ,private renderer: Renderer, private router: Router,
+              private modalDialogService: ModalDialogService,
+              private viewContainer: ViewContainerRef) {}
 
   openCustomModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Add New dealer __________________ ',
+      title: 'Add New Dealer __________________ ',
       childComponent: DealerPopupComponent,
+      settings: {
+        bodyClass:'mdb-color modal-body',
+        closeButtonClass: ' btn-danger fa fa-close prefix grey-text',
+      } 
+    });
+  }
+
+  editData(dealerInfo){
+
+    this.modalDialogService.openDialog(this.viewContainer, {
+     
+      title: 'Update Dealer Data__________________ ',
+      childComponent:DealerEditComponent ,
+      data: dealerInfo,
       settings: {
         bodyClass:'mdb-color modal-body',
         closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
       },
-      // actionButtons: [
-      //   {
-      //     text: 'Cancel',
-      //     buttonClass: 'btn btn-danger',
-      //     onAction: () => new Promise((resolve: any) => {
-      //       setTimeout(() => {
-      //         resolve();
-      //       }, 20);
-      //     })
-      //   },
-      // ],  
     });
   }
 
-  
+  delData(id){
+    console.log(id)
+    this.http.delete('http://localhost:8000/api/wholeSales/dealers/'+id)
+    .subscribe(res => {
+        console.log(res)
+        // this.router.navigate(['../dealer']);
+        window.location.href = "/dealer";
+      }, (err) => {
+        console.log("Error = "+err);
+      }
+    );
+  }
+
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -57,6 +75,7 @@ import 'rxjs/add/operator/map';
          'csv',
          'print',
         ]
+        
       };
       this.http.get('http://localhost:8000/api/wholeSales/dealers')
       .map(this.extractData)
@@ -76,7 +95,7 @@ import 'rxjs/add/operator/map';
   } 
 
 export class dealerInfo{
-  id: Number;
+  dID: Number;
   dName: String;
   company: String;
   purchaseProducts:String;
@@ -84,20 +103,9 @@ export class dealerInfo{
   purchasingDate:Date;
 }
 
-interface IModalDialogSettings {
-  // overlayClass: string;
-  // overlayAnimationTriggerClass: string;
-  // modalClass: string;
-  // modalAnimationTriggerClass: string;
-  // contentClass: string;
-  // headerClass: string;
-  // headerTitleClass: string;
-  // closeButtonClass: string;
+interface IModalDialogSettings<T> {
   closeButtonTitle: string;
   bodyClass: string;
-  // footerClass: string;
-  // alertClass: string;
-  // alertDuration: number;
-  // buttonClass: string;
-  // notifyWithAlert: boolean;
+  data: T;
+
 }

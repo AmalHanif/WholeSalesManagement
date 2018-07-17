@@ -1,0 +1,52 @@
+<!-- Material form register -->
+<form class="well" (submit)="editStockData(parentInfo._id, parentInfo)"  method="post" id="customer-form" > 
+    <!-- Material input text -->
+    <div class="md-form"  style="margin-top: 0;">
+       
+        <i class="fa fa-user prefix grey-text"></i>
+        <label>Product Name</label><br/>
+        <input type="text" [(ngModel)]="parentInfo.pName" name="pName" id="pName" class="form-control">
+        
+    </div>
+    
+    <!-- Material input email -->
+    <div class="md-form" >
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <label>Product Brand</label><br/>
+        <input type="text" [(ngModel)]="parentInfo.pBrand" name="pBrand" class="form-control">
+        
+    </div>
+        <!-- Material input sales Product -->
+        <div class="md-form" >
+            <i class="fa fa-shopping-cart  prefix  grey-text" aria-hidden="true"></i>
+            <label >Product Quantity</label><br/>
+            <input type="text"  [(ngModel)]="parentInfo.pQuantity" name="pQuantity" class="form-control">
+            
+        </div>
+         <!-- Material input Orignal -->
+         <div class="md-form" >
+            <i class="fa fa-money  prefix  grey-text" aria-hidden="true"></i>
+            <label >Orignal Cost</label><br/>
+            <input type="number"[(ngModel)]="parentInfo.pCost" name="pCost" class="form-control">
+           
+        </div>
+         <!-- Material input sales price -->
+        <div class="md-form" >
+            <i class="fa fa-rupee  prefix  grey-text" aria-hidden="true"></i>
+            <label>Sales Price</label><br/>
+            <input type="number" [(ngModel)]="parentInfo.pPrice" name="pPrice" class="form-control">
+           
+        </div>
+        
+        <div class="md-form" >
+            <i class="fa fa-calendar  prefix  grey-text" aria-hidden="true"></i>
+            <label>Date</label><br/>
+            <input type="date" [(ngModel)]="parentInfo.purchaseDate" name="purchaseDate" class="form-control">
+            
+        </div>
+        <div class="text-center mt-4">
+            <button href="/customer" class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+    <!-- Material form register -->
+<!-- <p>This came from parent: <b>{{parentInfo}}</b></p> -->

@@ -2,24 +2,18 @@ import{ModuleWithProviders } from '@angular/core';
 import{Routes, RouterModule } from '@angular/router';
 
 import{NavbarComponent} from './components/navbar.component';
-import{LoginComponent} from './components/login.component';
+import{LoginComponent} from './components/login/login.component';
 import{SignInComponent} from './components/signup.component';
-import{HomeComponent} from './components/home.component';
-import{AboutComponent} from './components/about.component';
-import{DealerComponent} from './components/dealer.component';
-import{SalesComponent} from './components/sales.component';
-import{StockComponent} from './components/stock.component';
-import{CustomerComponent} from './components/customer.component';
-// import{DialogboxComponent} from './components/dialogbox.component';
+import{HomeComponent} from './components/home/home.component';
+import{DealerComponent} from './components/dealer/dealer.component';
+import{SalesComponent} from './components/sales/sales.component';
+import{StockComponent} from './components/stock/stock.component';
+import{CustomerComponent} from './components/customer/customer.component';
 
 const appRoutes: Routes =[
   {
     path:'home',
     component: HomeComponent
-  },
-  {
-    path: 'about',
-    component: AboutComponent
   },
   {
     path: 'dealer',
@@ -38,7 +32,7 @@ const appRoutes: Routes =[
     component: SalesComponent
   },
   {
-    path: 'login',
+    path: '',
     component: LoginComponent
   },
   {

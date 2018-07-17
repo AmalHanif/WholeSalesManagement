@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { SalesPopupComponent } from './salesPopup.component';
+import { SalesEditComponent} from './sales-edit.component';
 import 'rxjs/add/operator/map';
+
 @Component({
   moduleId: module.id,
   selector: 'sales',
@@ -18,28 +21,45 @@ export class SalesComponent  implements OnInit  {
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private  http: Http , private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef) {}  
+  constructor(private  http: Http ,private router: Router,
+            private modalDialogService: ModalDialogService,
+            private viewContainer: ViewContainerRef) {}
 
   openCustomModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Add New dealer __________________ ',
+      title: 'Add New sales __________________ ',
       childComponent: SalesPopupComponent,
       settings: {
         bodyClass:'mdb-color modal-body',
         closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
       },
-      // actionButtons: [
-      //   {
-      //     text: 'Cancel',
-      //     buttonClass: 'btn btn-danger',
-      //     onAction: () => new Promise((resolve: any) => {
-      //       setTimeout(() => {
-      //         resolve();
-      //       }, 20);
-      //     })
-      //   },
-      // ],  
     });
+  }
+
+  editData(salesInfo){ 
+    this.modalDialogService.openDialog(this.viewContainer, {
+      
+      title: 'Update Sales Data__________________ ',
+      childComponent:SalesEditComponent ,
+      data: salesInfo,
+      settings: {
+        bodyClass:'mdb-color modal-body',
+        closeButtonClass: ' btn-danger fa fa-close prefix grey-text'
+      },
+    });
+  }
+
+  delData(id){
+    console.log(id)
+    this.http.delete('http://localhost:8000/api/wholeSales/sales/'+id)
+    .subscribe(res => {
+        console.log(res)
+        // this.router.navigate(['../sales']);
+        window.location.href = "/sales";
+      }, (err) => {
+        console.log("Error = "+err);
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -75,6 +95,7 @@ export class SalesComponent  implements OnInit  {
  
 
 export class salesInfo{
+  sID:Number;
   cName: String;
   cAddress: String;
   pName: String;
@@ -85,7 +106,8 @@ export class salesInfo{
   soldDate:Date;
 }
 
-interface IModalDialogSettings {
+interface IModalDialogSettings<T> {
   closeButtonTitle: string;
   bodyClass: string;
+  data: T;
 }

@@ -2,6 +2,7 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var StockSchema   = new Schema({
+        pID:Number,
         pName: String,
         pBrand: String,
         pQuantity:String,
